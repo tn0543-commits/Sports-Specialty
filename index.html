@@ -459,17 +459,17 @@
 
     <script>
         const sportsData = [
-            { id: 1, en: "Badminton", emoji: "🏸", img: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400&q=80" },
-            { id: 2, en: "Weightlifting", emoji: "🏋️", img: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=400&q=80" },
-            { id: 3, en: "Basketball", emoji: "🏀", img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&q=80" },
-            { id: 4, en: "Track and Field", emoji: "🏃", img: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&q=80" },
-            { id: 5, en: "Shooting", emoji: "🎯", img: "https://images.unsplash.com/photo-1595590424283-b8f1784cb2c6?w=400&q=80" },
-            { id: 6, en: "Pole Vault", emoji: "🩼", img: "https://images.unsplash.com/photo-1562088287-bde35a1ea917?w=400&q=80" },
-            { id: 7, en: "Hammer Throw", emoji: "🔨", img: "https://images.unsplash.com/photo-1569429593410-b498b3fb3387?w=400&q=80" },
-            { id: 8, en: "Javelin Throw", emoji: "🏹", img: "https://images.unsplash.com/photo-1574144611814-b37311c90297?w=400&q=80" },
-            { id: 9, en: "Shot Put", emoji: "🪨", img: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&q=80" },
-            { id: 10, en: "High Jump", emoji: "🤸", img: "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?w=400&q=80" },
-            { id: 11, en: "Long Jump", emoji: "🦘", img: "https://images.unsplash.com/photo-1533228876829-65c94e7b5025?w=400&q=80" }
+            { id: 1, en: "Badminton", emoji: "🏸", img: "1. badminton.jpg" },
+            { id: 2, en: "Weightlifting", emoji: "🏋️", img: "2. weightlifting.jpg" },
+            { id: 3, en: "Basketball", emoji: "🏀", img: "3.basketball.jpg" },
+            { id: 4, en: "Track and Field", emoji: "🏃", img: "4. Sprint.jpg" },
+            { id: 5, en: "Shooting", emoji: "🎯", img: "5.Shooting.jpg" },
+            { id: 6, en: "Pole Vault", emoji: "🩼", img: "6. Pole Vault.jpg" },
+            { id: 7, en: "Hammer Throw", emoji: "🔨", img: "7. hammer throw.jpg" },
+            { id: 8, en: "Javelin Throw", emoji: "🏹", img: "8. Javelin Throw.jpg" },
+            { id: 9, en: "Shot Put", emoji: "🪨", img: "9. Shot Put.jpg" },
+            { id: 10, en: "High Jump", emoji: "🤸", img: "10. High Jump.jpg" },
+            { id: 11, en: "Long Jump", emoji: "🦘", img: "11. Long Jump.jpg" }
         ];
 
         let currentUtterance = null;
@@ -482,7 +482,7 @@
             
             if (displayImg) {
                 return `<div class="${containerClasses} overflow-hidden bg-gray-900 border-2 border-gray-800 flex items-center justify-center">
-                            <img src="${displayImg}" class="w-full h-full object-cover" alt="${sport.en}" onerror="this.src='https://placehold.co/400x400/111/fff?text=${sport.en}'">
+                            <img src="${displayImg}" class="w-full h-full object-contain" alt="${sport.en}" onerror="this.src='https://placehold.co/800x800/111/fff?text=${sport.en}'">
                         </div>`;
             } else {
                 return `<div class="${containerClasses} bg-gray-900 border-2 border-red-900 flex items-center justify-center ${iconClasses} text-white drop-shadow-2xl">
@@ -501,7 +501,7 @@
                 const img = new Image();
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const MAX_SIZE = 400; // Small size for fast cloud sync
+                    const MAX_SIZE = 2048; // Increased size limit for HD clarity
                     let width = img.width;
                     let height = img.height;
 
@@ -515,7 +515,7 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
                     
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.65); // High compression
+                    const dataUrl = canvas.toDataURL('image/png'); // Use lossless PNG instead of compressed JPEG
                     
                     if(window.saveImageToCloud) {
                         window.saveImageToCloud(pendingUploadId, dataUrl);
